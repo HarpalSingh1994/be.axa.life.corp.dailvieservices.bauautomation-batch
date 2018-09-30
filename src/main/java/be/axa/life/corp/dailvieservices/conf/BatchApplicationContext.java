@@ -21,9 +21,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import be.axa.life.corp.dailvieservices.tasklets.CheckMailDifferedAffiliation;
-import be.axa.life.corp.dailvieservices.tasklets.CheckNasLocationDifferedAffiliation;
+import be.axa.life.corp.dailvieservices.tasklets.CheckNasLocation;
 import be.axa.life.corp.dailvieservices.tasklets.RunOracleQueryDifferedAffiliation;
-import be.axa.life.corp.dailvieservices.tasklets.SendMailDifferedAffiliation;
+import be.axa.life.corp.dailvieservices.tasklets.SendMail;
 
 @Configuration
 @EnableBatchProcessing
@@ -45,8 +45,8 @@ public class BatchApplicationContext {
 	@Bean
 	public Job DifferedAffiliationJob() {
 		return jobBuilderFactory.get("DifferedAffiliationJob").incrementer(new RunIdIncrementer())
-				.start(stepCheckMailDifferedAffiliation()).next(stepCheckNasLocationDifferedAffiliation())
-				.next(stepRunOracleQueryDifferedAffiliation()).next(stepSendMailDifferedAffiliation())
+				.start(stepCheckMailDifferedAffiliation()).next(stepCheckNasLocation())
+				.next(stepRunOracleQueryDifferedAffiliation()).next(stepSendMail())
 				.build();
 	}
 
@@ -60,13 +60,13 @@ public class BatchApplicationContext {
 		return new CheckMailDifferedAffiliation();
 	}
 	@Bean
-	public Step stepCheckNasLocationDifferedAffiliation() {
-		return stepBuilderFactory.get("stepCheckNasLocationDifferedAffiliation").tasklet(checkNasLocationDifferedAffiliation()).build();
+	public Step stepCheckNasLocation() {
+		return stepBuilderFactory.get("stepCheckNasLocation").tasklet(checkNasLocation()).build();
 	}
 
 	@Bean
-	public CheckNasLocationDifferedAffiliation checkNasLocationDifferedAffiliation() {
-		return new CheckNasLocationDifferedAffiliation();
+	public CheckNasLocation checkNasLocation() {
+		return new CheckNasLocation();
 	}
 	
 	@Bean
@@ -80,16 +80,16 @@ public class BatchApplicationContext {
 	}
 	
 	@Bean
-	public Step stepSendMailDifferedAffiliation() {
-		return stepBuilderFactory.get("stepSendMailDifferedAffiliation").tasklet(sendMailDifferedAffiliation()).build();
+	public Step stepSendMail() {
+		return stepBuilderFactory.get("stepSendMail").tasklet(sendMail()).build();
 	}
 
 	@Bean
-	public SendMailDifferedAffiliation sendMailDifferedAffiliation() {
-		return new SendMailDifferedAffiliation();
+	public SendMail sendMail() {
+		return new SendMail();
 	}
 
-	@Scheduled(cron = "*/10 * * * * *")
+	@Scheduled(cron = "* 1 * * * *")
 	public void perform() throws Exception {
 
 		System.out.println("Harpal - Job Started at :" + new Date());

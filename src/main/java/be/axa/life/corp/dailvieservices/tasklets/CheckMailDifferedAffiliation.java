@@ -1,24 +1,11 @@
 package be.axa.life.corp.dailvieservices.tasklets;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Properties;
-
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Store;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-
-import be.axa.life.corp.dailvieservices.foundation.Constants;
 
 public class CheckMailDifferedAffiliation implements Tasklet {
 
@@ -91,5 +78,4 @@ public class CheckMailDifferedAffiliation implements Tasklet {
 			return null;
 		}*/
 	}
-
 }
