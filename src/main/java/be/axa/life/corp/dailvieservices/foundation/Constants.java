@@ -14,7 +14,8 @@ public class Constants {
 	public static final String DATE_FORMAT = "EEEEE dd MMMMM yyyy HH:mm:ss";
 	public static final String DATE_FORMAT_MONTH = "MM";
 	public static final String IMAGE_FORMAT = "jpeg";
-	public static final String COUNT_DIFF_SORTIE = "select * from tb_modification_asked where Screen_number in ('PC24','PC52','PC62','PC53','PC63') and STATUS_ON_MF = 'W' and CREATIONDATE < To_Date(?, 'DD/MM/YYYY HH24:MI') order by CREATIONDATE";
+	public static final String COUNT_DIFF_SORTIE = "select count(*) from tb_modification_asked where Screen_number in ('PC24','PC52','PC62','PC53','PC63') and STATUS_ON_MF = 'W' and CREATIONDATE < To_Date(?, 'DD/MM/YYYY HH24:MI') order by CREATIONDATE";
+	public static final String DATA_DIFF_SORTIE = "select * from tb_modification_asked where Screen_number in ('PC24','PC52','PC62','PC53','PC63') and STATUS_ON_MF = 'W' and CREATIONDATE < To_Date(?, 'DD/MM/YYYY HH24:MI') order by CREATIONDATE";
 	public static final String READ_COUNT_DOCTYPE1 = "select count (*)  from tb_quittance_document where doctype = '1' and quittance_date = To_Date(?, 'DD/MM/YYYY')";
 	public static final String READ_COUNT_DOCTYPE2 = "select count (*)  from tb_quittance_document where doctype = '2' and quittance_date = To_Date(?, 'DD/MM/YYYY')";
 	public static final String READ_COUNT_DOCTYPE3 = "select count (*)  from tb_quittance_document where doctype = '3' and quittance_date = To_Date(?, 'DD/MM/YYYY')";

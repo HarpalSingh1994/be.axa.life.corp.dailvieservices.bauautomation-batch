@@ -45,6 +45,20 @@ public class OracleDao {
 		return getJdbcTemplate().query(Constants.READ_PENDING_DIFFERED, params,
 				tbHistoricContractAffRowMapper);
 	}
+	public List<Object> getDifferedSortieData(int env) {
+
+		jdbcTemplate = new JdbcTemplate(getOracleConnection(env));
+		TbModificationAskedRowMapper tbModificationAskedRowMapper = new TbModificationAskedRowMapper();
+		Calendar c = Calendar.getInstance(); // this takes current date
+		c.set(Calendar.DAY_OF_MONTH, 1);
+		Date date = c.getTime();
+
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HH24:MI");
+		String date1 = dateFormatter.format(date);
+		Object[] params = new Object[] { date1 };
+		return getJdbcTemplate().query(Constants.DATA_DIFF_SORTIE, params,
+				tbModificationAskedRowMapper);
+	}
 	public int countDiffredSortie(int env) {
 
 		jdbcTemplate = new JdbcTemplate(getOracleConnection(env));
